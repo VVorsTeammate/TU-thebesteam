@@ -1,0 +1,43 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage[english,russian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\include{sql-highlight}
+
+\geometry{a4paper, left=35mm, top=25mm, right=35mm, bottom=20mm}
+
+\titleformat{\section}{\normalfont\Large\bfseries\filcenter}{}{0em}{}
+
+\author{Ремизов Кирилл, Москаев Влад}
+\title{Физические основы перехвата воздушных целей зенитной управляемой ракеты(ЗУР)}
+\date{4 февраля 2026}
+
+\begin{document}
+	
+	\include{00-title}
+	
+	\tableofcontents
+	\newpage
+	\include{001-PostTitle}
+	\newpage
+	\include{01-methods}
+	\newpage
+	\include{02-coord-systems}
+	\newpage
+	\include{03-STUR}
+	\newpage
+	\include{04-Neupokoi}
+	\newpage
+	\include{05-conclusion}
+	\newpage
+	\include{05-references}
+\end{document}

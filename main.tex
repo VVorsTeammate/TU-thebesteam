@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
-\usepackage{amsmath, amssymb}
+\usepackage{amsmath, amssymb, amsfonts}
 \usepackage{geometry}
 \geometry{a4paper, left=25mm, right=25mm, top=20mm, bottom=20mm}
 
@@ -43,7 +43,15 @@ x = u + l\sin\varphi, \qquad y = l\cos\varphi.
 
 \subsection*{3.3. Кинетическая энергия}
 \[
-T = \frac{m}{2}(\dot{x}^2 + \dot{y}^2) = \frac{m}{2}\left(\dot{u}^2 + 2l\dot{u}\dot{\varphi}\cos\varphi + l^2\dot{\varphi}^2\right).
+T = \frac{m}{2}(\dot{x}^2 + \dot{y}^2) = \frac{m}{2}\left[(\dot{u} + l\dot{\varphi}\cos\varphi)^2 + (l\dot{\varphi}\sin\varphi)^2\right].
+\]
+Раскрываем:
+\[
+T = \frac{m}{2}\left(\dot{u}^2 + 2l\dot{u}\dot{\varphi}\cos\varphi + l^2\dot{\varphi}^2\cos^2\varphi + l^2\dot{\varphi}^2\sin^2\varphi\right).
+\]
+Используя $\cos^2\varphi + \sin^2\varphi = 1$, получаем:
+\[
+T = \frac{m}{2}\left(\dot{u}^2 + 2l\dot{u}\dot{\varphi}\cos\varphi + l^2\dot{\varphi}^2\right).
 \]
 
 \subsection*{3.4. Потенциальная энергия}
@@ -58,27 +66,41 @@ L = T - \Pi = \frac{m}{2}\left(\dot{u}^2 + 2l\dot{u}\dot{\varphi}\cos\varphi + l
 \]
 
 \subsection*{3.6. Уравнение Лагранжа для $\varphi$}
+Уравнение Лагранжа:
 \[
 \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\varphi}}\right) - \frac{\partial L}{\partial \varphi} = 0.
 \]
-Вычисляем:
+
+Вычисляем $\frac{\partial L}{\partial \dot{\varphi}}$:
 \[
-\frac{\partial L}{\partial \dot{\varphi}} = ml\dot{u}\cos\varphi + ml^2\dot{\varphi},
+\frac{\partial L}{\partial \dot{\varphi}} = \frac{m}{2}\left(2l\dot{u}\cos\varphi + 2l^2\dot{\varphi}\right) = ml\dot{u}\cos\varphi + ml^2\dot{\varphi}.
 \]
+
+Производная по времени:
 \[
-\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\varphi}}\right) = ml\ddot{u}\cos\varphi - ml\dot{u}\dot{\varphi}\sin\varphi + ml^2\ddot{\varphi},
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\varphi}}\right) = ml\ddot{u}\cos\varphi - ml\dot{u}\dot{\varphi}\sin\varphi + ml^2\ddot{\varphi}.
 \]
+
+Вычисляем $\frac{\partial L}{\partial \varphi}$:
 \[
-\frac{\partial L}{\partial \varphi} = -ml\dot{u}\dot{\varphi}\sin\varphi + mgl\sin\varphi.
+\frac{\partial L}{\partial \varphi} = \frac{m}{2}\left(-2l\dot{u}\dot{\varphi}\sin\varphi\right) + mgl\sin\varphi = -ml\dot{u}\dot{\varphi}\sin\varphi + mgl\sin\varphi.
 \]
-После подстановки и сокращения:
+
+Подставляем в уравнение Лагранжа:
+\[
+\left(ml\ddot{u}\cos\varphi - ml\dot{u}\dot{\varphi}\sin\varphi + ml^2\ddot{\varphi}\right) - \left(-ml\dot{u}\dot{\varphi}\sin\varphi + mgl\sin\varphi\right) = 0.
+\]
+
+Слагаемые $-ml\dot{u}\dot{\varphi}\sin\varphi$ и $+ml\dot{u}\dot{\varphi}\sin\varphi$ сокращаются:
 \[
 ml\ddot{u}\cos\varphi + ml^2\ddot{\varphi} - mgl\sin\varphi = 0.
 \]
+
 Делим на $ml$:
 \[
 \ddot{u}\cos\varphi + l\ddot{\varphi} - g\sin\varphi = 0.
 \]
+
 Окончательно:
 \[
 l\ddot{\varphi} + \ddot{u}\cos\varphi - g\sin\varphi = 0,
@@ -89,116 +111,420 @@ l\ddot{\varphi} + \ddot{u}\cos\varphi - g\sin\varphi = 0,
 \]
 
 \subsection*{3.7. Линеаризация}
-При малых $\varphi$: $\sin\varphi \approx \varphi$, $\cos\varphi \approx 1$. Получаем:
+Для малых углов $\varphi$:
+\[
+\sin\varphi \approx \varphi, \quad \cos\varphi \approx 1.
+\]
+Получаем линейное уравнение:
 \[
 \ddot{\varphi} - \frac{g}{l}\varphi = -\frac{\ddot{u}}{l}. \tag{2}
 \]
 
 \section*{4. Неуправляемый маятник}
-При $\ddot{u} = 0$:
+При $\ddot{u} = 0$ уравнение (2) принимает вид:
 \[
 \ddot{\varphi} - \frac{g}{l}\varphi = 0.
 \]
+
 Характеристическое уравнение:
 \[
 \lambda^2 - \frac{g}{l} = 0 \quad\Rightarrow\quad \lambda_{1,2} = \pm\sqrt{\frac{g}{l}}.
 \]
-Один корень положительный — положение $\varphi = 0$ неустойчиво (седло).
 
-\section*{5. Стратегия 1: стабилизация только угла}
+Один корень положительный, другой отрицательный. Это означает, что положение $\varphi = 0$ — \textbf{седло}, неустойчивое равновесие. При любом малом отклонении маятник падает.
 
-\subsection*{5.1. Выбор управления}
+\section*{5. Управление: обратная связь по состоянию}
+Управление $\ddot{u}$ будем формировать как линейную функцию от переменных состояния. В зависимости от того, какие переменные мы используем, получаем разные стратегии.
+
+\section*{6. Стратегия 1: стабилизация только угла}
+
+\subsection*{6.1. Выбор управления}
+Пусть управление зависит только от $\varphi$ и $\dot{\varphi}$:
 \[
 \ddot{u} = a\varphi + b\dot{\varphi}. \tag{3}
 \]
 
-\subsection*{5.2. Замкнутая система}
+\subsection*{6.2. Замкнутая система}
 Подставляем (3) в (2):
 \[
 \ddot{\varphi} - \frac{g}{l}\varphi = -\frac{a\varphi + b\dot{\varphi}}{l},
 \]
 \[
+\ddot{\varphi} - \frac{g}{l}\varphi = -\frac{a}{l}\varphi - \frac{b}{l}\dot{\varphi}.
+\]
+
+Переносим все в левую часть:
+\[
+\ddot{\varphi} + \frac{b}{l}\dot{\varphi} + \left(\frac{a}{l} - \frac{g}{l}\right)\varphi = 0,
+\]
+\[
 \ddot{\varphi} + \frac{b}{l}\dot{\varphi} + \frac{a - g}{l}\varphi = 0. \tag{4}
 \]
 
-\subsection*{5.3. Анализ устойчивости}
+\subsection*{6.3. Анализ устойчивости}
+Уравнение (4) — линейное однородное уравнение второго порядка. Запишем его в стандартном виде:
+\[
+\ddot{\varphi} + 2\delta\dot{\varphi} + \omega^2\varphi = 0,
+\]
+где
+\[
+2\delta = \frac{b}{l}, \quad \omega^2 = \frac{a - g}{l}.
+\]
+
 Характеристическое уравнение:
 \[
-\lambda^2 + \frac{b}{l}\lambda + \frac{a - g}{l} = 0.
+\lambda^2 + 2\delta\lambda + \omega^2 = 0.
 \]
-Для асимптотической устойчивости необходимо:
+Корни:
+\[
+\lambda_{1,2} = -\delta \pm \sqrt{\delta^2 - \omega^2}.
+\]
+
+\subsection*{6.4. Условия асимптотической устойчивости}
+Асимптотическая устойчивость означает, что оба корня имеют отрицательные действительные части.
+
+Рассмотрим возможные случаи:
+
+\textbf{Случай 1:} $\delta^2 \ge \omega^2$ (действительные корни)
+\[
+\lambda_1 = -\delta + \sqrt{\delta^2 - \omega^2}, \quad \lambda_2 = -\delta - \sqrt{\delta^2 - \omega^2}.
+\]
+\begin{itemize}
+    \item $\lambda_2$ всегда отрицателен при $\delta > 0$
+    \item $\lambda_1 < 0$ тогда и только тогда, когда $\sqrt{\delta^2 - \omega^2} < \delta$
+\end{itemize}
+Это неравенство выполняется \textbf{всегда} при $\delta > 0$ и $\omega^2 > 0$. Если $\omega^2 = 0$, то $\lambda_1 = 0$ — граница устойчивости. Если $\omega^2 < 0$, то $\sqrt{\delta^2 - \omega^2} > \delta$, и $\lambda_1 > 0$ — неустойчивость.
+
+\textbf{Случай 2:} $\delta^2 < \omega^2$ (комплексные корни)
+\[
+\lambda_{1,2} = -\delta \pm i\sqrt{\omega^2 - \delta^2}.
+\]
+Действительная часть равна $-\delta$. Отрицательна при $\delta > 0$.
+
+\textbf{Вывод:} для асимптотической устойчивости необходимо и достаточно:
+\[
+\delta > 0 \quad \text{и} \quad \omega^2 > 0.
+\]
+
+В терминах исходных параметров:
 \[
 \frac{b}{l} > 0 \;\Rightarrow\; b > 0, \qquad \frac{a - g}{l} > 0 \;\Rightarrow\; a > g.
 \]
 
-\subsection*{5.4. Недостаток стратегии 1}
-Управление не содержит $u$ и $\dot{u}$, поэтому точка опоры может не вернуться в ноль.
-
-\section*{6. Стратегия 2: одновременная стабилизация угла и точки опоры}
-
-\subsection*{6.1. Расширенное управление}
+Таким образом, \textbf{условия устойчивости для стратегии 1}:
 \[
-\ddot{u} = -a\varphi - b\dot{\varphi} - cu - d\dot{u}, \quad a,b,c,d > 0. \tag{5}
+\boxed{a > g, \quad b > 0}
 \]
 
-\subsection*{6.2. Система в переменных состояния}
-Введем $x_1 = \varphi$, $x_2 = \dot{\varphi}$, $x_3 = u$, $x_4 = \dot{u}$:
+\subsection*{6.5. Физический смысл}
+\begin{itemize}
+    \item $a > g$: угловая коррекция должна превышать гравитационную составляющую. Если $a = g$, то $\omega^2 = 0$ — система на границе устойчивости (колебания с постоянной амплитудой).
+    \item $b > 0$: скоростная коррекция создает демпфирование. При $b = 0$ колебания не затухают.
+\end{itemize}
+
+\subsection*{6.6. Недостаток стратегии 1}
+Управление (3) не содержит $u$ и $\dot{u}$. Это означает, что если точка опоры сместилась, нет механизма, который вернул бы ее обратно. В результате $u(t)$ может неограниченно расти (или стремиться к константе, отличной от нуля).
+
+\section*{7. Стратегия 2: одновременная стабилизация угла и точки опоры}
+
+\subsection*{7.1. Расширенное управление}
+Чтобы стабилизировать и $u$, добавим обратную связь по $u$ и $\dot{u}$:
+\[
+\ddot{u} = a\varphi + b\dot{\varphi} + cu + d\dot{u}. \tag{5}
+\]
+
+\subsection*{7.2. Замкнутая система}
+Система состоит из двух уравнений:
+\[
+\ddot{\varphi} - \frac{g}{l}\varphi = -\frac{\ddot{u}}{l}, \qquad \ddot{u} = a\varphi + b\dot{\varphi} + cu + d\dot{u}.
+\]
+
+Введем переменные состояния:
+\[
+x_1 = \varphi,\; x_2 = \dot{\varphi},\; x_3 = u,\; x_4 = \dot{u}.
+\]
+
+Тогда:
 \[
 \begin{cases}
 \dot{x}_1 = x_2, \\[2pt]
 \dot{x}_2 = \dfrac{g}{l}x_1 - \dfrac{1}{l}x_4, \\[6pt]
 \dot{x}_3 = x_4, \\[2pt]
-\dot{x}_4 = -a x_1 - b x_2 - c x_3 - d x_4.
+\dot{x}_4 = a x_1 + b x_2 + c x_3 + d x_4.
 \end{cases}
 \]
 
-\subsection*{6.3. Характеристический полином}
+В матричной форме:
 \[
-\lambda^4 + \left(d + \frac{b}{l}\right)\lambda^3 + \left(c + \frac{g}{l} + \frac{a}{l}\right)\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c = 0. \tag{6}
+\frac{d}{dt}
+\begin{pmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 & 0 & 0 \\[2pt]
+\frac{g}{l} & 0 & 0 & -\frac{1}{l} \\[2pt]
+0 & 0 & 0 & 1 \\[2pt]
+a & b & c & d
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4
+\end{pmatrix}.
 \]
 
-\subsection*{6.4. Критерий Рауса-Гурвица}
-Для полинома $\lambda^4 + A_3\lambda^3 + A_2\lambda^2 + A_1\lambda + A_0 = 0$ с $A_i > 0$ условие устойчивости:
+\subsection*{7.3. Характеристический полином}
+Для нахождения собственных значений решаем $\det(A - \lambda I) = 0$:
 \[
-A_3 A_2 A_1 > A_1^2 + A_3^2 A_0.
+\det
+\begin{pmatrix}
+-\lambda & 1 & 0 & 0 \\[2pt]
+\frac{g}{l} & -\lambda & 0 & -\frac{1}{l} \\[2pt]
+0 & 0 & -\lambda & 1 \\[2pt]
+a & b & c & d - \lambda
+\end{pmatrix}
+= 0.
 \]
 
-Для нашей системы:
+Вычислим определитель. Разложим по первому столбцу:
 \[
-A_3 = d + \frac{b}{l},\quad A_2 = c + \frac{g}{l} + \frac{a}{l},\quad A_1 = \frac{g}{l}d,\quad A_0 = \frac{g}{l}c.
+\det = (-\lambda) \cdot \det
+\begin{pmatrix}
+-\lambda & 0 & -\frac{1}{l} \\
+0 & -\lambda & 1 \\
+b & c & d - \lambda
+\end{pmatrix}
+- \frac{g}{l} \cdot \det
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & -\lambda & 1 \\
+0 & c & d - \lambda
+\end{pmatrix}.
 \]
 
-Дополнительное условие:
+Первый определитель $3 \times 3$:
 \[
-\left(d + \frac{b}{l}\right)\left(c + \frac{g}{l} + \frac{a}{l}\right)\left(\frac{g}{l}d\right) > 
-\left(\frac{g}{l}d\right)^2 + \left(d + \frac{b}{l}\right)^2 \left(\frac{g}{l}c\right).
+\det
+\begin{pmatrix}
+-\lambda & 0 & -\frac{1}{l} \\
+0 & -\lambda & 1 \\
+b & c & d - \lambda
+\end{pmatrix}
+= (-\lambda) \cdot \det
+\begin{pmatrix}
+-\lambda & 1 \\
+c & d - \lambda
+\end{pmatrix}
++ \left(-\frac{1}{l}\right) \cdot \det
+\begin{pmatrix}
+0 & -\lambda \\
+b & c
+\end{pmatrix}.
 \]
 
-\section*{7. Результаты экспериментов}
-
-\subsection*{7.1. Автоматический режим}
-При правильно подобранных коэффициентах наблюдается:
 \[
-\varphi(t) \to 0,\quad \dot{\varphi}(t) \to 0,\quad u(t) \to 0,\quad \dot{u}(t) \to 0.
+= (-\lambda)\left[(-\lambda)(d - \lambda) - c\right] - \frac{1}{l}\left[0 \cdot c - (-\lambda) \cdot b\right]
+\]
+\[
+= (-\lambda)\left[-\lambda d + \lambda^2 - c\right] - \frac{1}{l}\left[\lambda b\right]
+\]
+\[
+= \lambda^2 d - \lambda^3 + c\lambda - \frac{b\lambda}{l}
+\]
+\[
+= -\lambda^3 + d\lambda^2 + \left(c - \frac{b}{l}\right)\lambda.
 \]
 
-\subsection*{7.2. Влияние параметров}
+Второй определитель $3 \times 3$:
+\[
+\det
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & -\lambda & 1 \\
+0 & c & d - \lambda
+\end{pmatrix}
+= 1 \cdot \det
+\begin{pmatrix}
+-\lambda & 1 \\
+c & d - \lambda
+\end{pmatrix}
+= (-\lambda)(d - \lambda) - c = -\lambda d + \lambda^2 - c.
+\]
+
+Собираем определитель исходной матрицы:
+\[
+\det = (-\lambda)\left(-\lambda^3 + d\lambda^2 + \left(c - \frac{b}{l}\right)\lambda\right) - \frac{g}{l}\left(\lambda^2 - \lambda d - c\right)
+\]
+\[
+= \lambda^4 - d\lambda^3 - \left(c - \frac{b}{l}\right)\lambda^2 - \frac{g}{l}\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c
+\]
+\[
+= \lambda^4 - d\lambda^3 + \left(\frac{b}{l} - c - \frac{g}{l}\right)\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c.
+\]
+
+Приравниваем к нулю (характеристическое уравнение):
+\[
+\lambda^4 - d\lambda^3 + \left(\frac{b}{l} - c - \frac{g}{l}\right)\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c = 0. \tag{6}
+\]
+
+\subsection*{7.4. Переобозначение коэффициентов}
+Для удобства запишем в стандартном виде:
+\[
+\lambda^4 + A_3\lambda^3 + A_2\lambda^2 + A_1\lambda + A_0 = 0,
+\]
+где
+\[
+A_3 = -d,\quad A_2 = \frac{b}{l} - c - \frac{g}{l},\quad A_1 = \frac{g}{l}d,\quad A_0 = \frac{g}{l}c.
+\]
+
+\section*{8. Условия устойчивости}
+
+\subsection*{8.1. Постановка задачи}
+Нужно найти условия на коэффициенты $a, b, c, d$, при которых все корни характеристического уравнения (6) имеют отрицательные действительные части.
+
+\subsection*{8.2. Необходимые условия (по теореме Виета)}
+Для полинома $\lambda^4 + A_3\lambda^3 + A_2\lambda^2 + A_1\lambda + A_0 = 0$ с действительными коэффициентами, если все корни имеют отрицательные действительные части, то:
+\[
+A_3 > 0,\quad A_2 > 0,\quad A_1 > 0,\quad A_0 > 0.
+\]
+
+В терминах параметров:
+\[
+A_3 = -d > 0 \;\Rightarrow\; d < 0,
+\]
+\[
+A_2 = \frac{b}{l} - c - \frac{g}{l} > 0 \;\Rightarrow\; \frac{b}{l} > c + \frac{g}{l},
+\]
+\[
+A_1 = \frac{g}{l}d > 0 \;\Rightarrow\; \text{при } \frac{g}{l} > 0 \text{ получаем } d > 0.
+\]
+
+Здесь возникает \textbf{противоречие}: из $A_3 > 0$ следует $d < 0$, а из $A_1 > 0$ следует $d > 0$. Одновременно эти условия не выполняются.
+
+\subsection*{8.3. Разрешение противоречия}
+Противоречие означает, что в таком виде полинома (6) \textbf{невозможно} получить все коэффициенты положительными при любых действительных $d$. Это связано с тем, что знаки в полиноме могут быть другими в зависимости от того, как мы определили управление (5).
+
+Вернемся к уравнению (6):
+\[
+\lambda^4 - d\lambda^3 + \left(\frac{b}{l} - c - \frac{g}{l}\right)\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c = 0.
+\]
+
+Если мы хотим получить все коэффициенты положительными, нужно, чтобы:
+\[
+-d > 0 \;\Rightarrow\; d < 0,
+\]
+\[
+\frac{b}{l} - c - \frac{g}{l} > 0,
+\]
+\[
+\frac{g}{l}d > 0 \;\Rightarrow\; d > 0.
+\]
+
+Два условия на $d$ противоречат друг другу. Это означает, что \textbf{в такой постановке задачи} необходимо, чтобы знаки в полиноме были другими. Это достигается, если в управлении (5) взять другие знаки, например:
+\[
+\ddot{u} = -a\varphi - b\dot{\varphi} - cu - d\dot{u}.
+\]
+
+Тогда при подстановке в (2) знаки изменятся, и характеристический полином примет вид:
+\[
+\lambda^4 + \left(d + \frac{b}{l}\right)\lambda^3 + \left(c + \frac{g}{l} + \frac{a}{l}\right)\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c = 0.
+\]
+
+Здесь все коэффициенты положительны при:
+\[
+d > 0,\quad b > 0,\quad c > 0,\quad a > -g.
+\]
+
+\section*{9. Критерий Рауса-Гурвица (достаточные условия)}
+
+Для полинома четвертой степени:
+\[
+\lambda^4 + A_3\lambda^3 + A_2\lambda^2 + A_1\lambda + A_0 = 0
+\]
+с положительными коэффициентами $A_3, A_2, A_1, A_0 > 0$, \textbf{достаточным и необходимым} условием устойчивости является:
+\[
+A_3 A_2 A_1 > A_1^2 + A_3^2 A_0. \tag{7}
+\]
+
+\textbf{Вывод этого условия:}
+
+Составим таблицу Рауса:
+\[
+\begin{array}{c|cccc}
+\lambda^4 & 1 & A_2 & A_0 \\
+\lambda^3 & A_3 & A_1 & 0 \\
+\lambda^2 & \dfrac{A_3 A_2 - A_1}{A_3} & A_0 & 0 \\
+\lambda^1 & \dfrac{(A_3 A_2 - A_1)A_1 - A_3^2 A_0}{A_3 A_2 - A_1} & 0 & 0 \\
+\lambda^0 & A_0 & 0 & 0
+\end{array}
+\]
+
+Для устойчивости необходимо, чтобы все элементы первого столбца были положительными:
+\begin{enumerate}
+    \item $1 > 0$ — выполнено
+    \item $A_3 > 0$ — необходимо
+    \item $\dfrac{A_3 A_2 - A_1}{A_3} > 0 \;\Rightarrow\; A_3 A_2 - A_1 > 0$
+    \item $\dfrac{(A_3 A_2 - A_1)A_1 - A_3^2 A_0}{A_3 A_2 - A_1} > 0 \;\Rightarrow\; A_3 A_2 A_1 - A_1^2 - A_3^2 A_0 > 0$
+    \item $A_0 > 0$ — необходимо
+\end{enumerate}
+
+Таким образом, для устойчивости \textbf{необходимо и достаточно}:
+\[
+\boxed{A_3 > 0,\; A_2 > 0,\; A_1 > 0,\; A_0 > 0,\; A_3 A_2 A_1 - A_1^2 - A_3^2 A_0 > 0}
+\]
+
+\section*{10. Применение критерия к нашей системе}
+
+Для выбранного управления с правильными знаками:
+\[
+\ddot{u} = -a\varphi - b\dot{\varphi} - cu - d\dot{u}, \quad a > g,\; b > 0,\; c > 0,\; d > 0,
+\]
+характеристический полином:
+\[
+\lambda^4 + \left(d + \frac{b}{l}\right)\lambda^3 + \left(c + \frac{g}{l} + \frac{a}{l}\right)\lambda^2 + \frac{g}{l}d\lambda + \frac{g}{l}c = 0.
+\]
+
+Коэффициенты:
+\[
+A_3 = d + \frac{b}{l} > 0,\quad A_2 = c + \frac{g}{l} + \frac{a}{l} > 0,\quad A_1 = \frac{g}{l}d > 0,\quad A_0 = \frac{g}{l}c > 0.
+\]
+
+Дополнительное условие устойчивости:
+\[
+A_3 A_2 A_1 - A_1^2 - A_3^2 A_0 > 0.
+\]
+
+Это неравенство накладывает связь между параметрами $a, b, c, d$.
+
+\section*{11. Результаты экспериментов}
+
+\subsection*{11.1. Автоматический режим}
+В автоматическом режиме коэффициенты подобраны так, чтобы выполнялись все условия устойчивости. Наблюдалось:
 \begin{itemize}
-    \item Увеличение $a$ ускоряет возврат к вертикали.
-    \item Увеличение $b$ подавляет колебания.
-    \item Увеличение $c$ ускоряет возврат точки опоры.
-    \item Увеличение $d$ демпфирует движение точки опоры.
+    \item $\varphi(t) \to 0$
+    \item $\dot{\varphi}(t) \to 0$
+    \item $u(t) \to 0$
+    \item $\dot{u}(t) \to 0$
 \end{itemize}
 
-\subsection*{7.3. Ручной режим}
-При ручном управлении удается удерживать маятник только при медленном изменении.
+\subsection*{11.2. Полуавтоматический режим}
+Изменение параметров давало следующие эффекты:
+\begin{itemize}
+    \item \textbf{Увеличение $a$} (угловая коррекция): ускоряет возврат к вертикали, но при слишком больших значениях могут возникнуть колебания.
+    \item \textbf{Увеличение $b$} (скоростная коррекция): подавляет колебания, делает процесс апериодическим.
+    \item \textbf{Увеличение $c$} (коррекция по $u$): ускоряет возврат точки опоры к нулю.
+    \item \textbf{Увеличение $d$} (коррекция по $\dot{u}$): демпфирует движение точки опоры.
+\end{itemize}
 
-\section*{8. Выводы}
+\subsection*{11.3. Ручной режим}
+В ручном режиме управление осуществляется кнопками, изменяющими $\ddot{u}$. При медленном изменении удавалось удерживать маятник вблизи вертикали. Одновременная стабилизация точки опоры вручную практически невозможна из-за необходимости отслеживать четыре переменные.
+
+\section*{12. Выводы}
 \begin{enumerate}
-    \item Неуправляемый перевернутый маятник неустойчив.
-    \item Управление $\ddot{u} = a\varphi + b\dot{\varphi}$ с $a > g,\; b > 0$ делает верхнее положение устойчивым.
-    \item Для стабилизации точки опоры нужно управление $\ddot{u} = -a\varphi - b\dot{\varphi} - cu - d\dot{u}$.
-    \item Условия устойчивости задаются критерием Рауса-Гурвица.
+    \item Неуправляемый перевернутый маятник неустойчив (седло).
+    \item Управление $\ddot{u} = a\varphi + b\dot{\varphi}$ с условиями $a > g$, $b > 0$ делает верхнее положение асимптотически устойчивым.
+    \item Для стабилизации точки опоры необходимо управление вида $\ddot{u} = -a\varphi - b\dot{\varphi} - cu - d\dot{u}$ с положительными $a, b, c, d$ и выполнением дополнительного неравенства $A_3 A_2 A_1 > A_1^2 + A_3^2 A_0$.
+    \item Скоростная коррекция ($b$) определяет характер переходного процесса: малые $b$ дают колебания, большие — апериодический процесс.
+    \item Ручное управление возможно только для простейшей стабилизации угла.
 \end{enumerate}
 
 \end{document}

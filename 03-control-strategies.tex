@@ -1,0 +1,47 @@
+\section{Стратегии управления}
+
+\subsection{Стратегия 1: Стабилизация только угла}
+Выберем управление в виде обратной связи по углу и угловой скорости:
+\[
+\ddot{u} = a\varphi + b\dot{\varphi}, \quad a,b \in \mathbb{R}. \tag{2}
+\]
+
+Подставляя (2) в (1), получаем замкнутую систему:
+\[
+\ddot{\varphi} + \frac{b}{l}\dot{\varphi} + \frac{a - g}{l}\varphi = 0. \tag{3}
+\]
+
+\subsubsection{Анализ устойчивости}
+Характеристическое уравнение (3):
+\[
+\lambda^2 + \frac{b}{l}\lambda + \frac{a - g}{l} = 0.
+\]
+
+Для асимптотической устойчивости необходимо и достаточно:
+\[
+\frac{b}{l} > 0 \quad\Rightarrow\quad b > 0, \qquad \frac{a - g}{l} > 0 \quad\Rightarrow\quad a > g.
+\]
+
+\subsection{Стратегия 2: Одновременная стабилизация угла и точки опоры}
+Для возврата точки опоры в нуль добавим обратную связь по \(u\) и \(\dot{u}\):
+\[
+\ddot{u} = -a\varphi - b\dot{\varphi} - cu - d\dot{u}, \quad a,b,c,d > 0. \tag{4}
+\]
+
+Система уравнений в переменных состояния:
+\[
+\begin{cases}
+\dot{x}_1 = x_2, \\
+\dot{x}_2 = \dfrac{g}{l}x_1 - \dfrac{1}{l}x_4, \\
+\dot{x}_3 = x_4, \\
+\dot{x}_4 = -a x_1 - b x_2 - c x_3 - d x_4,
+\end{cases}
+\]
+где \(x_1 = \varphi\), \(x_2 = \dot{\varphi}\), \(x_3 = u\), \(x_4 = \dot{u}\).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{03-block-diagram.png}
+	\caption{Структурная схема системы управления}
+	\label{fig:block}
+\end{figure}

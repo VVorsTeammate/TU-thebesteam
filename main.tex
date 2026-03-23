@@ -11,15 +11,13 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\include{sql-highlight}
-
 \geometry{a4paper, left=35mm, top=25mm, right=35mm, bottom=20mm}
 
 \titleformat{\section}{\normalfont\Large\bfseries\filcenter}{}{0em}{}
 
 \author{}
-\title{}
-\date{20 марта 2026}
+\title{Стабилизация перевернутого маятника}
+\date{\today}
 
 \begin{document}
 	
@@ -27,17 +25,23 @@
 	
 	\tableofcontents
 	\newpage
-	\include{001-PostTitle}
+	
+	\include{01-introduction}
 	\newpage
-	\include{01-methods}
+	
+	\include{02-derivation}
 	\newpage
-	\include{02-coord-systems}
+	
+	\include{03-control-strategies}
 	\newpage
-	\include{03-STUR}
+	
+	\include{04-stability-analysis}
 	\newpage
-	\include{04-Neupokoi}
+	
+	\include{05-experiments}
 	\newpage
-	\include{05-conclusion}
+	
+	\include{06-conclusion}
 	\newpage
-	\include{05-references}
+	
 \end{document}

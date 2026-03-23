@@ -1,0 +1,21 @@
+name: PDF Generator
+
+on: push
+
+permissions:
+  contents: write
+
+jobs:
+  create-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - run: sudo apt update && sudo apt install -y texlive-latex-base texlive-lang-cyrillic texlive-latex-extra
+      
+      - run: pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: main.pdf
+          path: main.pdf
